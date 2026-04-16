@@ -81,6 +81,10 @@ Before choosing keywords, first understand who you are trying to help and how th
 **What to do:**
 
 - Define your top audience groups (for example: researchers, clinicians, patients, caregivers, policy staff).
+- Define priority GEO targets for this cycle (country, region, and language):
+  - Primary target geographies (for example: US national, state-level focus, global English-speaking)
+  - Secondary geographies (if applicable)
+  - Language/localization scope per geography
 - List what each audience group is trying to do (learn, compare, apply, find a resource, contact support).
 - Write 5-10 real search-style questions each audience might type.
   - Example: "How do I find pediatric cancer data by year?"
@@ -108,6 +112,7 @@ Before choosing keywords, first understand who you are trying to help and how th
 For each page, create a short "Audience and Search Intent" note including:
 
 - Primary audience
+- Target geography and language
 - Top user questions
 - Primary keyword
 - Secondary keywords
@@ -163,6 +168,14 @@ Now that you have the keyword and audience-intent list from Step 1, prepare both
 - Ensure XML sitemap file (sitemap.xml) includes all new/updated pages
 - Submit updated sitemap to Google via [Google Search Console](https://search.google.com/search-console/about)
 - Submit to Bing via [Bing Webmaster Tools](https://www.bing.com/webmasters)
+- Track discovery and indexing from sitemap URLs:
+  - Total submitted URLs vs indexed URLs
+  - "Discovered - currently not indexed" and "Crawled - currently not indexed" counts
+  - New URLs indexed within 14 and 30 days
+- Keep a sitemap hygiene log per release:
+  - New URLs added, removed URLs, and lastmod updates
+  - Invalid/non-canonical URLs removed
+  - Target: 0 stale URLs and 0 broken URLs in sitemap
 
 **D. Configure Robots.txt:**
 
@@ -170,6 +183,11 @@ Now that you have the keyword and audience-intent list from Step 1, prepare both
 - Allow search engine crawlers to access important pages
 - Block sensitive pages or duplicate content if needed
 - Verify robots.txt configuration in [Google Search Console](https://search.google.com/search-console/about)
+- Validate robots impact monthly (not just configuration):
+  - Confirm no high-value pages are blocked unintentionally
+  - Confirm blocked URLs are low-value/admin/duplicate URLs
+  - Compare crawl requests trend for allowed vs blocked paths in logs or GSC crawl stats
+- Re-submit robots.txt and sitemap after major IA/content releases
 
 **Example XML Sitemap snippet (save as `/sitemap.xml`):**
 
@@ -259,6 +277,9 @@ Crawl-delay: 2
 - Image alt text updated
 - Publish date and owner
 - Tested in [Meta Tags](https://metatags.io/) tool
+- Sitemap submitted to Google and Bing with submission date recorded
+- Sitemap health report captured (submitted/indexed ratio, indexing lag, errors)
+- Robots.txt audit completed (blocked paths reviewed and approved)
 
 ## Step 3: Page Speed Optimization
 
@@ -275,9 +296,12 @@ Search engines and visitors both prefer fast-loading pages. A slow website hurts
 - Run [PageSpeed Insights](https://pagespeed.web.dev/) `Free` on each key page (desktop and mobile).
 - Record scores for:
   - Largest Contentful Paint (LCP) - target: under 2.5 seconds
-  - First Input Delay (FID) - target: under 100 milliseconds
+  - Interaction to Next Paint (INP) - target: under 200 milliseconds
   - Cumulative Layout Shift (CLS) - target: under 0.1
+  - Time to First Byte (TTFB) - target: under 0.8 seconds
+  - Performance score (mobile and desktop)
 - Note which pages need optimization.
+- Keep before/after numbers for each optimization release (required).
 
 **B. Optimize images:**
 
@@ -320,6 +344,15 @@ Step 5: Re-test to confirm improvement
 Step 6: Aim for Core Web Vitals passing score
 ```
 
+**Performance reporting minimum (monthly):**
+
+- Top 10 landing pages by organic sessions with:
+  - Mobile LCP, INP, CLS, TTFB
+  - Desktop LCP, INP, CLS, TTFB
+  - Pass/fail status for CWV thresholds
+- Sitewide CWV pass rate and trend vs prior month
+- % of pages improved and % regressed after deployments
+
 **Output checklist:**
 
 - Baseline page speed scores recorded (desktop and mobile)
@@ -331,6 +364,7 @@ Step 6: Aim for Core Web Vitals passing score
 - Core Web Vitals passing
 - Re-test scores documented and compared to baseline
 - Page speed improvement target achieved (e.g., 10% faster)
+- Monthly performance numbers published (not just recommendations)
 
 ## Step 4: Build External Links and Authority
 
@@ -366,6 +400,12 @@ Search engines view external links pointing to your site (backlinks) as "votes o
 - Check domain authority of linking sites (quality > quantity).
 - Record new backlinks monthly.
 - Remove or disavow low-quality or spam links.
+- Run a monthly SEMrush backlink audit report and include:
+  - Referring domains (new/lost)
+  - Authority trend
+  - Top anchor text distribution
+  - Toxicity score and list of toxic/suspicious links
+- Escalate toxic backlinks for review and prepare disavow file when needed.
 
 **D. Create link-worthy content:**
 
@@ -392,6 +432,8 @@ Search engines view external links pointing to your site (backlinks) as "votes o
 - Low-quality backlinks identified and marked for removal
 - New backlinks from high-authority sites documented
 - Monthly report on backlink growth showing trend
+- SEMrush backlink audit attached to monthly report
+- Toxic backlink review completed with action status (monitor/contact/disavow)
 
 ## Step 5: Keep Content Fresh and Relevant
 
@@ -498,6 +540,8 @@ You cannot improve what you don't measure. Regular monitoring shows whether your
   - Pages indexed by Google
   - Average page speed
   - Bounce rate
+  - Engagement rate and engaged sessions (GA4 equivalent for bounce interpretation)
+  - Single-page session rate for key landing pages
   - Conversion rate (if applicable)
 
 **B. Monitor weekly (quick check):**
@@ -512,6 +556,10 @@ You cannot improve what you don't measure. Regular monitoring shows whether your
   - Top landing pages
   - Pages with high bounce rate
   - Device performance (mobile vs desktop)
+- Validate "high bounce" pages for SPA behavior before escalation:
+  - Confirm scroll, outbound click, video, and key CTA events are tracked
+  - Confirm session engaged-time thresholds are configured consistently
+  - If a page is intentionally single-page, evaluate with engagement rate + conversion events, not bounce alone
 
 **C. Monitor monthly (detailed review):**
 
@@ -534,9 +582,23 @@ You cannot improve what you don't measure. Regular monitoring shows whether your
   - Issues found and fixes applied
   - Technical issues (broken links, crawl errors, Core Web Vitals)
   - Backlinks added
+  - Backlink/referral health (including toxic link findings from SEMrush)
+  - Robots/sitemap health and indexing efficiency
   - Content published or updated
   - Recommendations for next month
 - Store in shared drive (NIH SharePoint) for team access.
+
+**F. Run strategic diagnostics (monthly/quarterly):**
+
+- **GEO targeting review (monthly):**
+  - Confirm target geographies and language priorities are documented
+  - Review performance by country/region (traffic, CTR, rankings)
+  - Identify gaps where location intent exists but dedicated content is missing
+- **Competitive and cannibalization analysis (quarterly):**
+  - Run SEMrush/Ahrefs competitor benchmark for pediatric data topics
+  - Include NCI ecosystem overlap analysis to detect keyword cannibalization across related NCI sites
+  - For overlapping keywords, define canonical owner page/site and internal-link strategy
+  - Track share-of-voice trend for priority topic clusters
 
 **E. Track progress toward goals:**
 
@@ -599,6 +661,9 @@ NEXT MONTH PRIORITIES:
 - Goals set and progress tracked monthly
 - Issues identified and action items assigned
 - Improvement trends documented for reporting
+- Bounce/engagement interpretation validated for SPA-like journeys
+- GEO targeting report completed with target regions and performance
+- Quarterly competitive and cannibalization report completed
 
 
 
